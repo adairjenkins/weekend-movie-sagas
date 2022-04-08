@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Details() {
     const movieDetails = useSelector(store => store.movies[0]);
@@ -21,6 +22,7 @@ function Details() {
                     return <p>{genre}</p>
                 })}
             </div>
+            <Link to="/">Back to movie list</Link>
         </>
     )
 }
