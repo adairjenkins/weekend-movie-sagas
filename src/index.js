@@ -15,7 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('GET_DETAILS', getDetails);
-    yield takeEvery('GET_GENRES', getGenres);
+    // yield takeEvery('GET_GENRES', getGenres);
 }
 
 function* fetchAllMovies() {
@@ -43,17 +43,18 @@ function* getDetails(action) {
     }
 }
 
-function* getGenres(action) {
-    const movieId = action.payload;
-    console.log('saga getGenres func movieId:', movieId);
-    try {
-        let response = yield axios.get(`/api/genre/${movieId}`)
-        console.log('response.data in saga getGenres:', response.data);
-        // yield put({type: 'SET_GENRES', payload: response.data});
-    } catch {
-        console.log('error in saga getGenres');
-    }
-}
+// TO-DO: delete at end, using a single query instead
+// function* getGenres(action) {
+//     const movieId = action.payload;
+//     console.log('saga getGenres func movieId:', movieId);
+//     try {
+//         let response = yield axios.get(`/api/genre/${movieId}`)
+//         console.log('response.data in saga getGenres:', response.data);
+//         // yield put({type: 'SET_GENRES', payload: response.data});
+//     } catch {
+//         console.log('error in saga getGenres');
+//     }
+// }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
@@ -72,20 +73,21 @@ const movies = (state = [], action) => {
 }
 
 // Used to store the movie genres
-const genres = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_GENRES':
-            return action.payload;
-        default:
-            return state;
-    }
-}
+// TO-DO: delete at end, using a single query instead
+// const genres = (state = [], action) => {
+//     switch (action.type) {
+//         case 'SET_GENRES':
+//             return action.payload;
+//         default:
+//             return state;
+//     }
+// }
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
-        movies,
-        genres
+        movies
+        // genres
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
