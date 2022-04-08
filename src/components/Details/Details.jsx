@@ -12,14 +12,14 @@ function Details() {
     
     return (
         <>
-            <p>{movieDetails.title}</p>
+            <h2>{movieDetails.title}</h2>
             <img src={movieDetails.poster}/>
             <p>{movieDetails.description}</p>
-            <h3>Genres:</h3>
+            <h5>Genres:</h5>
             <ul>
                 {genres.map( genre => {
                     return (
-                        <li>{genre}</li>
+                        <p>{genre}</p>
                     )
                 })}
             </ul>
