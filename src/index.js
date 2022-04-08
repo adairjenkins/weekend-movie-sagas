@@ -49,7 +49,7 @@ function* getGenres(action) {
     try {
         let response = yield axios.get(`/api/genre/${movieId}`)
         console.log('response.data in saga getGenres:', response.data);
-        yield put({type: 'SET_GENRES', payload: response.data});
+        // yield put({type: 'SET_GENRES', payload: response.data});
     } catch {
         console.log('error in saga getGenres');
     }
