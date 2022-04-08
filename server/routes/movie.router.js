@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// GETs all movies from database
 router.get('/', (req, res) => {
 
   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
@@ -11,11 +12,28 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
       console.log('ERROR: Get all movies', err);
-      res.sendStatus(500)
+      res.sendStatus(500);
     })
 
 });
 
+// TO-DO : GETs details for selected movie
+router.get('/details/:movieId', (req, res) => {
+  console.log('movie.router details GET movieId:', req.params.movieId);
+
+  const query = `SELECT * FROM "movies"
+                 WHERE "id" = $1;`
+  pool.query(query, [req.params.movieId])
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch( error => {
+      console.log('server GET movie details', error)
+      res.sendStatus(500);
+    })
+});
+
+// POST request -> adds a new movie to "movies" and "movies_genres" tables in database
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
