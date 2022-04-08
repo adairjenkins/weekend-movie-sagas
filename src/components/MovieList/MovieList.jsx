@@ -15,7 +15,8 @@ function MovieList() {
 
     const handleDetails = (movie) => {
         console.log('handleDetails func:', movie.title)
-        dispatch({type:'GET_DETAILS', payload: movie.id});
+        dispatch({type: 'GET_DETAILS', payload: movie.id});
+        dispatch({type: 'GET_GENRES', payload: movie.id});
         history.push('/details');
     }
 

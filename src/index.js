@@ -15,6 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('GET_DETAILS', getDetails);
+    yield takeEvery('GET_GENRES', getGenres);
 }
 
 function* fetchAllMovies() {
@@ -42,6 +43,18 @@ function* getDetails(action) {
     }
 }
 
+function* getGenres(action) {
+    const movieId = action.payload;
+    console.log('saga getGenres func movieId:', movieId);
+    try {
+        let response = yield axios.get(`/api/genre/${movieId}`)
+        console.log('response.data in saga getGenres:', response.data);
+        yield put({type: 'SET_GENRES', payload: response.data});
+    } catch {
+        console.log('error in saga getGenres');
+    }
+}
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -57,17 +70,6 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-
-// store selected movie details
-// const movieDetails = (state= {}, action) => {
-//     switch(action.type) {
-//         case 'SET_DETAILS':
-//             console.log('SET_DETAILS action.payload:', action.payload);
-//             return action.payload;
-//         default:
-//             return state;
-//     }
-// }
 
 // Used to store the movie genres
 const genres = (state = [], action) => {
