@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import './MovieList.css'
 
 function MovieList() {
@@ -22,16 +24,18 @@ function MovieList() {
     return (
         <main>
             <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title} onClick={ () => handleDetails(movie)}/>
-                        </div>
-                    );
-                })}
-            </section>
+            <Grid container className="movies">
+                    {movies.map(movie => {
+                        return (
+                            <Grid item key={movie.id} >
+                                <Paper>
+                                    <h3>{movie.title}</h3>
+                                <img src={movie.poster} alt={movie.title} onClick={ () => handleDetails(movie)}/>
+                                </Paper>
+                            </Grid>
+                        );
+                    })}
+            </Grid>
         </main>
 
     );
