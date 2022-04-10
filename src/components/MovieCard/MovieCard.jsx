@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Card, CardHeader, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { CardActionArea } from '@mui/material';
 
+
 function MovieCard({movie}) {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ function MovieCard({movie}) {
     const handleDetails = (movie) => {
         console.log('handleDetails func:', movie.title)
         dispatch({type: 'GET_DETAILS', payload: movie.id});
-        history.push('/details');
+        history.push(`/details/${movie.id}`);
     }
     
     return (
