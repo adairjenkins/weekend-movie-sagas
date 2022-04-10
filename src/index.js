@@ -48,8 +48,8 @@ function* getDetails(action) {
     console.log('saga getDetails func movieId:', movieId);
     try {
         let response = yield axios.get(`/api/movie/details/${movieId}`)
-        console.log('response.data in saga getDetails:', response.data);
-        yield put({type: 'SET_DETAILS', payload: response.data});
+        console.log('response.data in saga getDetails:', response.data[0]);
+        yield put({type: 'SET_DETAILS', payload: response.data[0]});
     } catch {
         console.log('error in saga getDetails');
     }
@@ -76,11 +76,21 @@ const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
             return action.payload;
-        case 'SET_DETAILS':
-            console.log('SET_DETAILS action.payload:', action.payload);
-            return action.payload;
+        // case 'SET_DETAILS':
+        //     console.log('SET_DETAILS action.payload:', action.payload);
+        //     return action.payload;
         default:
             return state;
+    }
+}
+
+const detailsReducer = (state = {}, action) => {
+    if (action.type === 'SET_DETAILS') {
+        console.log('SET_DETAILS action.payload:', action.payload);
+        return action.payload;
+    } else {
+        console.log('else condition in detailsReducer');
+        return state;
     }
 }
 
@@ -98,7 +108,8 @@ const movies = (state = [], action) => {
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
-        movies
+        movies,
+        detailsReducer
         // genres
     }),
     // Add sagaMiddleware to our store
