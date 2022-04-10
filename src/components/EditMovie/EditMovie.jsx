@@ -1,11 +1,11 @@
 
 
-function EditMovie({movieDetails}) {
+function EditMovie() {
     console.log('EditMovie component')
     
     return (
         <>
-        <p>{movieDetails.title}</p>
+        <p>EDIT MOVIE</p>
         </>
     )
 }

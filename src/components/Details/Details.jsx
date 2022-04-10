@@ -32,7 +32,7 @@ function Details() {
 
     const editMovie = () => {
         console.log('editMovie func');
-        history.push('/edit');
+        history.push(`/edit/${id}`);
     }
     
     return (
