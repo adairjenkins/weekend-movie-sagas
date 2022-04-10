@@ -25,8 +25,8 @@ function MovieList() {
         <main>
             <Container >
                 <Grid container spacing={4}>
-                    <Grid item>
-                        <AddRoundedIcon onClick={handleAddMovie} sx={{ cursor: 'pointer', fontSize: 60 }}/>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <AddRoundedIcon onClick={handleAddMovie} sx={{ cursor: 'pointer', fontSize: 50 }}/>
                     </Grid>
                     {movies.map(movie => (
                         <Grid key={movie.id} item xs={6} sm={4} md={3} lg={2}>
