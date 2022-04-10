@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
 import TextField from '@mui/material/TextField';
 import FilledInput from '@mui/material/FilledInput';
@@ -14,12 +14,19 @@ import HomeIcon from '@mui/icons-material/Home';
 
 function EditMovie() {
     const id = useParams().id;
+    
+    useEffect(() => {
+        dispatch({type: 'GET_DETAILS', payload: id});
+    }, []);
+
+    const movieDetails = useSelector(store => store.detailsReducer);
+    console.log('movieDetails:', movieDetails);
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('');
-    const [url, setUrl] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState(movieDetails.title);
+    const [url, setUrl] = useState(movieDetails.poster);
+    const [description, setDescription] = useState(movieDetails.description);
     const [genreId, setGenreId] = useState('');
 
     const handleSubmit = (event) => {
@@ -53,18 +60,18 @@ function EditMovie() {
                 Edit Movie
             </Typography>
         <form onSubmit={handleSubmit}>
-            <TextField label="Title" required variant="filled" value={title} sx={{ minWidth: 400 }} onChange={(event) => setTitle(event.target.value)}>
+            <TextField label="Title" variant="filled" value={title} sx={{ minWidth: 400 }} onChange={(event) => setTitle(event.target.value)}>
                 <FilledInput id="title"/>
             </TextField>
             <FormControl>
-            <TextField label="Description" value={description} required multiline variant="filled" sx={{ minWidth: 600 }} onChange={(event) => setDescription(event.target.value)}>
+            <TextField label="Description" value={description} multiline variant="filled" sx={{ minWidth: 600 }} onChange={(event) => setDescription(event.target.value)}>
                 <FilledInput/>
             </TextField>
             </FormControl>
-            <TextField label="Poster URL" required variant="filled" sx={{ minWidth: 600 }} value={url} onChange={(event) => setUrl(event.target.value)}>
+            <TextField label="Poster URL" variant="filled" sx={{ minWidth: 600 }} value={url} onChange={(event) => setUrl(event.target.value)}>
                 <FilledInput/>
             </TextField>
-            <FormControl sx={{ minWidth: 200 }} required>
+            <FormControl sx={{ minWidth: 200 }}>
                 <InputLabel id="select-genre">Genre</InputLabel>
                 <Select
                 labelId="select-genre"
