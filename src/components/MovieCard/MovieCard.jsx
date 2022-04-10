@@ -14,7 +14,7 @@ function MovieCard({movie}) {
     }
     
     return (
-        <Card raised={true} >
+        <Card raised={true}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -23,7 +23,7 @@ function MovieCard({movie}) {
                     onClick={ () => handleDetails(movie)}
                     />
                 < CardContent>
-                    <Typography>
+                    <Typography variant="h6">
                         {movie.title}
                     </Typography>
                 </CardContent>

@@ -21,14 +21,16 @@ function Details() {
     }
     
     return (
-        <Container>
-            <Card variant="outlined">
-                <Grid container>
-                    <Grid item>
+        <Grid container spacing={1}>
+            <Grid container item xs={12} sm={8} md={8} lg={8} >
+                <Card raised={true}>
+                    <Grid container item xs={5} sm={5} md={5} lg={5}>
                         <CardMedia
+                            className="posterDetail"
                             component="img"
                             image={movieDetails.poster}
                             alt={movieDetails.title}
+                            // height="400"
                         />
                     </Grid>
                     <Grid item>
@@ -50,13 +52,13 @@ function Details() {
                     </Grid>
                     <Grid item>
                         <CardActions >
-                            <HomeIcon fontSize="large" onClick={returnHome}/>
+                            <HomeIcon fontSize="large" onClick={returnHome} sx={{ cursor: 'pointer' }}/>
                             <EditIcon fontSize="large"/>
                         </CardActions>
                     </Grid>
-                </Grid>
-            </Card>
-        </Container>
+                </Card>
+            </Grid>
+        </Grid>
     )
 }
 
