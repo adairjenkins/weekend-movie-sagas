@@ -1,6 +1,7 @@
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
 import { useState } from 'react';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -9,10 +10,12 @@ import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 
 function AddMovie() {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('');
     const [url, setUrl] = useState('');
     const [description, setDescription] = useState('');
@@ -21,7 +24,20 @@ function AddMovie() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('handleSubmit func');
+        console.log('title:', title);
+
+        const newMovie = {
+            title: title,
+            poster: url,
+            description: description,
+            genre_id: genreId
+        }
+        console.log('handleSubmit func newMovie:', newMovie);
+        dispatch({type: 'ADD_MOVIE', payload: newMovie});
+        setTitle('');
+        setUrl('');
+        setDescription('');
+        setGenreId('')
         // returnHome();
     }
 
@@ -29,18 +45,28 @@ function AddMovie() {
         console.log('returnHome func');
         history.push('/');
     }
-
+    
+    const handleUrlChange = (event) => {
+        setUrl(event.target.value)
+        console.log('url', url);
+    }
+    
     return (
         <Container maxWidth="sm">
+            <Typography variant="h5">
+                Add Movie
+            </Typography>
         <form onSubmit={handleSubmit}>
-            <TextField label="Title" required variant="filled" sx={{ minWidth: 400 }}>
-                <Input id="title" value={title} onChange={(event) => setTitle(event.target.value)}/>
+            <TextField label="Title" required variant="filled" value={title} sx={{ minWidth: 400 }} onChange={(event) => setTitle(event.target.value)}>
+                <FilledInput id="title"/>
             </TextField>
-            <TextField label="Description" required multiline variant="filled" sx={{ minWidth: 600 }}>
-                <Input id="title" value={description} onChange={(event) => setDescription(event.target.value)}/>
+            <FormControl>
+            <TextField label="Description" value={description} required multiline variant="filled" sx={{ minWidth: 600 }} onChange={(event) => setDescription(event.target.value)}>
+                <FilledInput/>
             </TextField>
-            <TextField label="Poster URL" required variant="filled" sx={{ minWidth: 500 }}>
-                <Input id="title" value={url} onChange={(event) => setUrl(event.target.value)}/>
+            </FormControl>
+            <TextField label="Poster URL" required variant="filled" sx={{ minWidth: 600 }} value={url} onChange={handleUrlChange}>
+                <FilledInput/>
             </TextField>
             <FormControl sx={{ minWidth: 200 }} required>
                 <InputLabel id="select-genre">Genre</InputLabel>
@@ -67,7 +93,7 @@ function AddMovie() {
                 </Select>
             </FormControl>
             <Button type="submit">
-                    Add Movie
+                    Add
             </Button>
             <Button onClick={returnHome}>
                 <HomeIcon fontSize="large" sx={{ cursor: 'pointer' }}/>
