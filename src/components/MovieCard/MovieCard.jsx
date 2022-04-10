@@ -16,17 +16,16 @@ function MovieCard({movie}) {
 
     const cardStyle = {
 
-        // height: "45vw"
-        width: 300,
-        height: 500
+        // // height: "45vw"
+        // width: 420,
+        // height: 600
       };
     
     return (
-        <Card >
+        <Card style={cardStyle} raised={true} >
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    // width="50%"
                     image={movie.poster}
                     alt={movie.title}
                     onClick={ () => handleDetails(movie)}

@@ -18,9 +18,9 @@ function MovieList() {
         <main>
             <Container >
                 <h1>MovieList</h1>
-                <Grid container className="movies">
+                <Grid container spacing={4}>
                         {movies.map(movie => (
-                            <Grid key={movie.id}>
+                            <Grid key={movie.id} item xs={6} sm={4} md={3} lg={2}>
                                 < MovieCard movie={movie} />
                             </Grid>
                         ))}
