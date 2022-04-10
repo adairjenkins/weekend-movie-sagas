@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Container, Grid } from '@material-ui/core';
 import { Card, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
 import EditIcon from '@mui/icons-material/Edit';

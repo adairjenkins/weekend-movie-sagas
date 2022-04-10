@@ -39,7 +39,7 @@ router.get('/details/:movieId', (req, res) => {
 
 // POST request -> adds a new movie to "movies" and "movies_genres" tables in database
 router.post('/', (req, res) => {
-  console.log(req.body);
+  console.log('req.body:', req.body);
   // RETURNING "id" will give us back the id of the created movie
   const insertMovieQuery = `
   INSERT INTO "movies" ("title", "poster", "description")
