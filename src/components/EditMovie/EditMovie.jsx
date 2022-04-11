@@ -11,6 +11,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
+import Swal from 'sweetalert2';
 
 function EditMovie() {
     const id = useParams().id;
@@ -33,19 +34,21 @@ function EditMovie() {
         event.preventDefault();
         console.log('title:', title);
 
-        const newMovie = {
+        const editedMovie = {
             title: title,
             poster: url,
             description: description,
             genre_id: genreId
         }
-        console.log('handleSubmit func newMovie:', newMovie);
-        dispatch({type: 'ADD_MOVIE', payload: newMovie});
+        console.log('handleSubmit func newMovie:', editedMovie);
+        dispatch({type: 'EDIT_MOVIE', payload: {id: id, movie: editedMovie}});
         setTitle('');
         setUrl('');
         setDescription('');
         setGenreId('')
-        // returnHome();
+
+        Swal.fire('Movie added to database')
+        returnHome();
     }
 
     const returnHome = () => {

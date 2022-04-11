@@ -17,6 +17,21 @@ function* rootSaga() {
     yield takeEvery('GET_DETAILS', getDetails);
     // yield takeEvery('GET_GENRES', getGenres);
     yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('EDIT_MOVIE', editMovie);
+}
+
+// PUT
+function* editMovie(action) {
+    const movieId = action.payload.id;
+    const movie = action.payload.movie;
+    console.log('saga editMovie id & movie:', movieId, movie);
+
+    try {
+        yield axios.put(`/api/movie/${movieId}`, movie)
+        yield put({type: 'FETCH_MOVIES'})
+    } catch {
+        console.log('error in saga editMovie');
+    }
 }
 
 // POST
