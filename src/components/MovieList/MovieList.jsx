@@ -29,7 +29,7 @@ function MovieList() {
                         <AddRoundedIcon onClick={handleAddMovie} sx={{ cursor: 'pointer', fontSize: 50 }}/>
                     </Grid>
                     {movies.map(movie => (
-                        <Grid key={movie.id} item xs={6} sm={4} md={3} lg={2}>
+                        <Grid key={movie.id} item xs={6} sm={4} md={3} lg={3}>
                             < MovieCard movie={movie} />
                         </Grid>
                     ))}

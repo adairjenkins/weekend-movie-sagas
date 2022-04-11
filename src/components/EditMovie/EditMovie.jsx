@@ -30,6 +30,7 @@ function EditMovie() {
     const [description, setDescription] = useState(movieDetails.description);
     const [genreId, setGenreId] = useState('');
 
+    // send updated movie data to database
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('title:', title);
@@ -47,7 +48,7 @@ function EditMovie() {
         setDescription('');
         setGenreId('')
 
-        Swal.fire('Movie added to database')
+        Swal.fire('Updated movie info')
         returnHome();
     }
 

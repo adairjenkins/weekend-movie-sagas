@@ -11,6 +11,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 
 
 function AddMovie() {
@@ -21,7 +22,7 @@ function AddMovie() {
     const [description, setDescription] = useState('');
     const [genreId, setGenreId] = useState('');
 
-
+    // triggers POST request to server and database
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('title:', title);
@@ -38,7 +39,9 @@ function AddMovie() {
         setUrl('');
         setDescription('');
         setGenreId('')
-        // returnHome();
+
+        Swal.fire('Added new movie');
+        returnHome();
     }
 
     const returnHome = () => {
@@ -46,7 +49,6 @@ function AddMovie() {
         history.push('/');
     }
 
-    
     return (
         <Container maxWidth="sm">
             <Typography variant="h5">
