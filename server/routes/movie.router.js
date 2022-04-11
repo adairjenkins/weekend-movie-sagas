@@ -75,4 +75,28 @@ router.post('/', (req, res) => {
   })
 })
 
+// PUT request -> updates database with edited movie data
+router.put('/:movieId', (req, res) => {
+  const id = req.params.movieId;
+  const movie = req.body;
+  console.log('id & movie:', id, movie);
+  
+  const query = `UPDATE "movies"
+                 SET "title" = $1,
+                     "poster" = $2,
+                     "description" = $3
+                 WHERE "id" = $4;
+  `;
+  const values = [movie.title, movie.poster, movie.description, id];
+
+  pool.query(query, values)
+  .then( result => {
+    res.sendStatus(201);
+  })
+  .catch( error => {
+    console.log('server PUT', error)
+    res.sendStatus(500);
+  })
+});
+
 module.exports = router;
