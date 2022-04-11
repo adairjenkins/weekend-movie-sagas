@@ -45,11 +45,7 @@ function AddMovie() {
         console.log('returnHome func');
         history.push('/');
     }
-    
-    const handleUrlChange = (event) => {
-        setUrl(event.target.value)
-        console.log('url', url);
-    }
+
     
     return (
         <Container maxWidth="sm">
@@ -65,7 +61,7 @@ function AddMovie() {
                 <FilledInput/>
             </TextField>
             </FormControl>
-            <TextField label="Poster URL" required variant="filled" sx={{ minWidth: 600 }} value={url} onChange={handleUrlChange}>
+            <TextField label="Poster URL" required variant="filled" sx={{ minWidth: 600 }} value={url} onChange={(event) => setUrl(event.target.value)}>
                 <FilledInput/>
             </TextField>
             <FormControl sx={{ minWidth: 200 }} required>

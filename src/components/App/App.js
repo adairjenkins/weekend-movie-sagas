@@ -3,6 +3,7 @@ import './App.css';
 import MovieList from '../MovieList/MovieList';
 import AddMovie from '../AddMovie/AddMovie';
 import Details from '../Details/Details';
+import EditMovie from '../EditMovie/EditMovie';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         </Route>
         <Route path="/details/:id">
           <Details/>
+        </Route>
+        <Route path="/edit/:id">
+          <EditMovie/>
         </Route>
         <Route path="/add-movie">
           < AddMovie/>
